@@ -11,9 +11,15 @@ CHAT_ID = os.getenv('CHAT_ID')
 SHEET_ID = '1Ws_Tr81EAbwm6fRUr9XJ_fN63-QwVuBDUp6uNlPE3Mw'
 
 # === Save credentials.json from GitHub Secret ===
-creds_json = os.getenv('GOOGLE_CREDENTIALS_JSON')
-with open('credentials.json', 'w') as f:
-    f.write(creds_json)
+import base64
+
+creds_b64 = os.getenv('GOOGLE_CREDENTIALS_BASE64')
+if not creds_b64:
+    raise ValueError("❌ GOOGLE_CREDENTIALS_BASE64 is missing!")
+
+with open('credentials.json', 'wb') as f:
+    f.write(base64.b64decode(creds_b64))
+
 
 # === Connect to Google Sheet ===
 scopes = ['https://www.googleapis.com/auth/spreadsheets']
