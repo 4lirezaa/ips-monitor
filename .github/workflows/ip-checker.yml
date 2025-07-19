@@ -2,7 +2,7 @@ name: Run IP Monitor
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  
+    - cron: '0 */6 * * *'  # Every 6 hours
   workflow_dispatch:
 
 jobs:
@@ -25,6 +25,7 @@ jobs:
           echo "API_KEY=${{ secrets.VIEWDNS_API_KEY }}" >> $GITHUB_ENV
           echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> $GITHUB_ENV
           echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> $GITHUB_ENV
+          echo "GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }}" >> $GITHUB_ENV
 
       - name: Run script
         run: python main.py
